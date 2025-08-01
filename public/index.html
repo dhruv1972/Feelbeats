@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeelBeats - Mood-Based Music</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-music"></i>
+                <h1>FeelBeats</h1>
+            </div>
+            <p class="tagline">Discover music that matches your mood</p>
+
+            <!-- Spotify Authentication -->
+            <div class="auth-section" id="authSection">
+                <button class="spotify-login-btn" id="spotifyLoginBtn" onclick="loginToSpotify()">
+                    <i class="fab fa-spotify"></i>
+                    Connect with Spotify
+                </button>
+                <p class="auth-note">Connect to access real playlists and play music</p>
+                <p class="auth-note" style="font-size: 0.8em; opacity: 0.8;">💡 Browser playback requires Spotify
+                    Premium. Free accounts open playlists in Spotify app.</p>
+            </div>
+        </header>
+
+        <!-- Music Player -->
+        <div class="music-player" id="musicPlayer" style="display: none;">
+            <div class="player-info">
+                <img id="currentTrackImage" src="" alt="Track" class="track-image">
+                <div class="track-details">
+                    <h3 id="currentTrackName">No track playing</h3>
+                    <p id="currentTrackArtist">Select a mood to start</p>
+                </div>
+            </div>
+            <div class="player-controls">
+                <button class="control-btn" id="prevBtn" onclick="previousTrack()">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn play-btn" id="playBtn" onclick="togglePlay()">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </button>
+                <button class="control-btn" id="nextBtn" onclick="nextTrack()">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="time-display">
+                    <span id="currentTime">0:00</span>
+                    <span id="totalTime">0:00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mood Selection -->
+        <section class="mood-section">
+            <h2>How are you feeling today?</h2>
+            <div class="mood-grid">
+                <div class="mood-card" data-mood="chill">
+                    <div class="mood-icon">😌</div>
+                    <h3>Chill</h3>
+                    <p>Relaxed and peaceful</p>
+                </div>
+                <div class="mood-card" data-mood="energetic">
+                    <div class="mood-icon">⚡</div>
+                    <h3>Energetic</h3>
+                    <p>High energy and pumped</p>
+                </div>
+                <div class="mood-card" data-mood="romantic">
+                    <div class="mood-icon">💕</div>
+                    <h3>Romantic</h3>
+                    <p>Love and tenderness</p>
+                </div>
+                <div class="mood-card" data-mood="focus">
+                    <div class="mood-icon">🎯</div>
+                    <h3>Focus</h3>
+                    <p>Concentration and study</p>
+                </div>
+                <div class="mood-card" data-mood="happy">
+                    <div class="mood-icon">😊</div>
+                    <h3>Happy</h3>
+                    <p>Joyful and upbeat</p>
+                </div>
+                <div class="mood-card" data-mood="sad">
+                    <div class="mood-icon">😔</div>
+                    <h3>Sad</h3>
+                    <p>Melancholy and reflective</p>
+                </div>
+                <div class="mood-card" data-mood="angry">
+                    <div class="mood-icon">😤</div>
+                    <h3>Angry</h3>
+                    <p>Intense and powerful</p>
+                </div>
+                <div class="mood-card" data-mood="peaceful">
+                    <div class="mood-icon">🧘</div>
+                    <h3>Peaceful</h3>
+                    <p>Calm and meditative</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="results-header">
+                <h2 id="selectedMoodTitle">Your Mood: <span id="selectedMood"></span></h2>
+                <button class="change-mood-btn" onclick="showMoodSelection()">
+                    <i class="fas fa-arrow-left"></i> Change Mood
+                </button>
+            </div>
+
+            <div class="results-content">
+                <!-- GIF Display -->
+                <div class="gif-container">
+                    <h3>Mood Visual</h3>
+                    <div class="gif-wrapper">
+                        <img id="moodGif" src="" alt="Mood GIF" class="mood-gif">
+                    </div>
+                </div>
+
+                <!-- Playlists Display -->
+                <div class="playlists-container">
+                    <h3>Recommended Playlists</h3>
+                    <div class="playlists-grid" id="playlistsGrid">
+                        <!-- Playlists will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Finding the perfect music for your mood...</p>
+        </div>
+    </div>
+
+    <!-- Spotify Web Playback SDK -->
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
